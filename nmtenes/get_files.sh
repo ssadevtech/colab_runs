@@ -9,5 +9,4 @@ elif [ "$1" = "data" ]; then
 
 else
     echo "Invalid option"
-    echo {nmt_model, nmt_utils, nmt_vocab, run_nmt_enes}.py
 fi

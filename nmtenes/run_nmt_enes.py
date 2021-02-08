@@ -622,8 +622,8 @@ def main():
         lr_decay = float(args['--lr-decay'])
         max_epochs = int(args['--max-epoch'])
         
-        train_data, dev_data, vocab = load_data_train(train_src_path, train_tgt_path, dev_src_path, dev_tgt_path, create_vocab=True, 
-                                            vocab_path=vocab_path, vocab_size=50000, vocab_cutoff = 2, subset=0.5, 
+        train_data, dev_data, vocab = load_data_train(train_src_path, train_tgt_path, dev_src_path, dev_tgt_path, create_vocab=False, 
+                                            vocab_path=vocab_path, vocab_size=50000, vocab_cutoff = 2, subset=1, 
                                             random_subset=True)
         train(train_data, dev_data, vocab, embed_size=embed_size, hidden_size=hidden_size, dropout_rate=dropout_rate, 
               uniform_init=uniform_init, device=device, lr=lr, batch_size=train_batch_size, clip_grad=clip_grad, 
