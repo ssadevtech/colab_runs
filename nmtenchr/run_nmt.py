@@ -416,7 +416,7 @@ def decode(test_src_path, test_tgt_path=None, model_path='model.bin', tokenizer=
     model = model.to(torch.device(device))
 
     hypotheses = beam_search(model, test_data_src, beam_size=beam_size, max_decoding_time_step=max_decoding)
-    print(hypotheses)
+    #print(hypotheses)
     if test_tgt_path is not None:
         top_hypotheses = [hyps[0] for hyps in hypotheses]
         bleu_score = compute_corpus_level_bleu_score(test_data_tgt, top_hypotheses)
