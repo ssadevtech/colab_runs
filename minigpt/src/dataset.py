@@ -167,8 +167,26 @@ class CharCorruptionDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
-        # TODO [part e]: see spec above
-        raise NotImplementedError
+        #[part e]: see spec above
+        document = self.data[idx]
+        
+        if len(document) < 4:
+            raise Exception(f'doc: {document} has length less than 4')
+        trunc_length = min(random.randint(4, int(self.block_size*7/8)), len(document))
+        mask_length = min(max(1,int(random.gauss(int(0.25*trunc_length), 0.05*trunc_length))), trunc_length-2)
+        pref_length = random.randint(1, trunc_length - mask_length - 1)
+        prefix = document[:pref_length]
+        masked_content = document[pref_length:(pref_length+mask_length)]
+        suffix = document[(pref_length+mask_length):trunc_length]
+
+        masked_string = prefix + self.MASK_CHAR + suffix + self.MASK_CHAR + masked_content + \
+                        self.PAD_CHAR * (self.block_size-trunc_length-2)
+
+        x = masked_string[:-1]
+        y = masked_string[1:]
+        x = torch.tensor([self.stoi[c] for c in x], dtype=torch.long)
+        y = torch.tensor([self.stoi[c] for c in y], dtype=torch.long)
+        return x, y
 
 """
 Code under here is strictly for your debugging purposes; feel free to modify
