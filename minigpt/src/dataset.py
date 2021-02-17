@@ -170,8 +170,8 @@ class CharCorruptionDataset(Dataset):
         #[part e]: see spec above
         document = self.data[idx]
         
-        if len(document) < 4:
-            raise Exception(f'doc: {document} has length less than 4')
+        #if len(document) < 4:
+        #    raise Exception(f'doc: {document} has length less than 4')
         trunc_length = min(random.randint(4, int(self.block_size*7/8)), len(document))
         mask_length = min(max(1,int(random.gauss(int(0.25*trunc_length), 0.05*trunc_length))), trunc_length-2)
         pref_length = random.randint(1, trunc_length - mask_length - 1)
