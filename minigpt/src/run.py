@@ -82,7 +82,7 @@ if args.function == 'pretrain':
     #     final_tokens=200*len(pretrain_dataset)*block_size
     #     num_workers=4
     # start code
-    tconf = trainer.TrainerConfig(max_epochs=100, batch_size=128, learning_rate=6e-3, lr_decay=True, warmup_tokens=512*20, 
+    tconf = trainer.TrainerConfig(max_epochs=650, batch_size=128, learning_rate=6e-3, lr_decay=True, warmup_tokens=512*20, 
                               final_tokens=200*len(pretrain_dataset)*block_size, num_workers=4)
     
     trainer = trainer.Trainer(model, pretrain_dataset, None, tconf)
@@ -131,7 +131,7 @@ elif args.function == 'finetune':
         tconf = trainer.TrainerConfig(max_epochs=10, batch_size=256, learning_rate=6e-4, lr_decay=True, warmup_tokens=512*20, 
                               final_tokens=200*len(pretrain_dataset)*block_size, num_workers=4)
     else:
-        tconf = trainer.TrainerConfig(max_epochs=50, batch_size=256, learning_rate=6e-4, lr_decay=True, warmup_tokens=512*20, 
+        tconf = trainer.TrainerConfig(max_epochs=75, batch_size=256, learning_rate=6e-4, lr_decay=True, warmup_tokens=512*20, 
                               final_tokens=200*len(pretrain_dataset)*block_size, num_workers=4)
     
     trainer = trainer.Trainer(model, train_dataset, None, tconf)
